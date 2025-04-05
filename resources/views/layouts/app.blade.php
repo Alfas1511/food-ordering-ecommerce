@@ -26,12 +26,10 @@
         href="{{ asset('assets/packages/thumbelina/thumbelina.css') }}">
     <link rel="stylesheet" type="text/css" media="all"
         href="{{ asset('assets/packages/bootstrap-touchspin/bootstrap-touchspin.css') }}">
-    <link rel="stylesheet" type="text/css" media="all"
-        href="{{ asset('assets/css/theme.css"') }}>
+    <link rel="stylesheet" type="text/css" media="all" href="{{ asset('assets/css/theme.css"') }}">
 
     <!-- Fonts -->
-    <link rel="dns-prefetch"
-        href="//fonts.bunny.net">
+    <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
@@ -40,79 +38,108 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        @include('layouts.header')
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+        <div id="page-content" class="page-content">
+            <div class="banner">
+                <div class="jumbotron jumbotron-video text-center bg-dark mb-0 rounded-0">
+                    <video width="100%" preload="auto" loop autoplay muted>
+                        <source src='assets/media/explore.mp4' type='video/mp4' />
+                        <source src='assets/media/explore.webm' type='video/webm' />
+                    </video>
+                    <div class="container">
+                        <h1 class="pt-5">
+                            Save time and leave the<br>
+                            groceries to us.
+                        </h1>
+                        <p class="lead">
+                            Always Fresh Everyday.
+                        </p>
 
-                    </ul>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card border-0 text-center">
+                                    <div class="card-icon">
+                                        <div class="card-icon-i">
+                                            <i class="fa fa-shopping-basket"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">
+                                            Buy
+                                        </h4>
+                                        <p class="card-text">
+                                            Simply click-to-buy on the product you want and submit your order when
+                                            you're done.
+                                        </p>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                                    </div>
                                 </div>
-                            </li>
-                        @endguest
-                    </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card border-0 text-center">
+                                    <div class="card-icon">
+                                        <div class="card-icon-i">
+                                            <i class="fas fa-leaf"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">
+                                            Harvest
+                                        </h4>
+                                        <p class="card-text">
+                                            Our team ensures the produce quality is up to our standard and delivers to
+                                            your door within 24 hours of harvest day.
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card border-0 text-center">
+                                    <div class="card-icon">
+                                        <div class="card-icon-i">
+                                            <i class="fa fa-truck"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">
+                                            Delivery
+                                        </h4>
+                                        <p class="card-text">
+                                            Farmers receive your orders two days in advance so they can prepare for
+                                            harvest exactly as your orders – no wasted produce.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+            <main class="py-4">
+                @auth
+                    @yield('content')
 
-    <script type="text/javascript" src="{{ asset('assets/js/jquery.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/js/jquery-migrate.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/packages/bootstrap/libraries/popper.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/packages/bootstrap/bootstrap.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/packages/o2system-ui/o2system-ui.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/packages/owl-carousel/owl-carousel.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/packages/cloudzoom/cloudzoom.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/packages/thumbelina/thumbelina.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/packages/bootstrap-touchspin/bootstrap-touchspin.js') }}">
-    </script>
-    <script type="text/javascript" src="{{ asset('assets/js/theme.js') }}"></script>
+                @endauth
+            </main>
+
+        </div>
+
+        @include('layouts.footer')
+
+        <script type="text/javascript" src="{{ asset('assets/js/jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/js/jquery-migrate.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/packages/bootstrap/libraries/popper.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/packages/bootstrap/bootstrap.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/packages/o2system-ui/o2system-ui.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/packages/owl-carousel/owl-carousel.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/packages/cloudzoom/cloudzoom.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/packages/thumbelina/thumbelina.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/packages/bootstrap-touchspin/bootstrap-touchspin.js') }}">
+        </script>
+        <script type="text/javascript" src="{{ asset('assets/js/theme.js') }}"></script>
 </body>
 
 </html>
